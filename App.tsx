@@ -1,4 +1,4 @@
-import { StyleSheet, View, Text, StatusBar } from "react-native";
+import { StyleSheet, View, StatusBar } from 'react-native';
 
 export default function App() {
   return (
@@ -11,9 +11,9 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
-    color: "black",
-    alignItems: "center",
-    justifyContent: "flex-start",
+    backgroundColor: '#fff',
+    color: 'black',
+    alignItems: 'center',
+    justifyContent: 'flex-start',
   },
 });
