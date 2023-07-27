@@ -1,5 +1,5 @@
 import { StyleSheet, View, StatusBar, Text } from 'react-native';
-import { SearchBar } from './src/components';
+import { RandomGifDisplay, SearchBar } from './src/components';
 import { useState } from 'react';
 
 export default function App() {
@@ -14,7 +14,7 @@ export default function App() {
       {searchText.length >= 2 ? (
         <Text style={styles.resultText}>search results:</Text>
       ) : (
-        <Text>RANDOM GIF GOES HERE!</Text>
+        <RandomGifDisplay />
       )}
     </View>
   );

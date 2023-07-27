@@ -92,6 +92,7 @@ const styles = StyleSheet.create({
     marginRight: 8,
   },
   input: {
+    flex: 1,
     fontSize: 16,
   },
   clearIcon: {
