@@ -1,5 +1,5 @@
 // TODO: improve typing
-export type RandomGif = {
+export type GifType = {
   type: string;
   id: string;
   url: string;

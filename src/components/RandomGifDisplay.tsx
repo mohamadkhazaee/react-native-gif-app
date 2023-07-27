@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import {
   View,
   Text,
@@ -8,10 +8,10 @@ import {
   Linking,
 } from 'react-native';
 import { fetchRandomGif } from '../api';
-import { RandomGif } from '../api/types';
+import { GifType } from '../api/types';
 
 export const RandomGifDisplay = () => {
-  const [randomGif, setRandomGif] = useState<RandomGif>();
+  const [randomGif, setRandomGif] = useState<GifType>();
 
   useEffect(() => {
     fetchRandomGif()
