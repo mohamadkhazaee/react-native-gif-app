@@ -17,7 +17,6 @@ export const RandomGifDisplay = () => {
     fetchRandomGif()
       .then((res) => {
         setRandomGif(res.data);
-        console.log(res.data);
       })
       .catch(() => {
         // TODO: handle failure of api!
