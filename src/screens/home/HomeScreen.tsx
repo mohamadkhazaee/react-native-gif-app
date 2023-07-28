@@ -7,13 +7,12 @@ import {
   Dimensions,
   TouchableOpacity,
 } from 'react-native';
-import { RandomGifDisplay, SearchBar } from '../components';
+import { RandomGifDisplay } from './RandomGifDisplay';
 import { useEffect, useState } from 'react';
-import { searchGifs } from '../api';
-// TODO: fix imports of api
-import { GifType } from '../api/types';
 import type { NativeStackScreenProps } from '@react-navigation/native-stack';
-import { RootStackParamList } from '../../App';
+import { RootStackParamList } from '../../../App';
+import { SearchBar } from '../../components';
+import { GifType, searchGifs } from '../../api';
 
 type HomeScreenProps = NativeStackScreenProps<RootStackParamList, 'Home'>;
 
