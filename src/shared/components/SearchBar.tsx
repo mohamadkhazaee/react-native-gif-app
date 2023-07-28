@@ -11,8 +11,8 @@ import { MaterialIcons } from '@expo/vector-icons';
 type SearchBarProps = {
   value: string;
   onChange: (value: string) => void;
-  onFocus: () => void;
-  onBlur: () => void;
+  onFocus?: () => void;
+  onBlur?: () => void;
 };
 
 export const SearchBar = ({
@@ -32,7 +32,7 @@ export const SearchBar = ({
   const handleCancelFocus = () => {
     setShowCancel(false);
     onChange('');
-    onBlur();
+    onBlur?.();
     if (ref.current) {
       ref.current.blur();
     }
@@ -55,7 +55,7 @@ export const SearchBar = ({
           onChangeText={onChange}
           onFocus={() => {
             setShowCancel(true);
-            onFocus();
+            onFocus?.();
           }}
         />
         {value.length > 0 && (
