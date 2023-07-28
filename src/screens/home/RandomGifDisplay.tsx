@@ -37,9 +37,8 @@ export const RandomGifDisplay = () => {
     getData();
   }, []);
 
-  // TODO: fix interval duration
   useEffect(() => {
-    const interval = setInterval(getData, 15000);
+    const interval = setInterval(getData, 10000);
     return () => clearInterval(interval);
   }, []);
 

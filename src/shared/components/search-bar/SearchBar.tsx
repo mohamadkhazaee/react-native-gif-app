@@ -6,7 +6,6 @@ import {
   StyleSheet,
   Text,
 } from 'react-native';
-import { MaterialIcons } from '@expo/vector-icons';
 
 type SearchBarProps = {
   value: string;
@@ -15,12 +14,12 @@ type SearchBarProps = {
   onBlur?: () => void;
 };
 
-export const SearchBar = ({
+export function SearchBar({
   value,
   onChange,
   onFocus,
   onBlur,
-}: SearchBarProps) => {
+}: SearchBarProps) {
   const [showCancel, setShowCancel] = useState(false);
 
   const ref = useRef<TextInput>(null);
@@ -41,13 +40,8 @@ export const SearchBar = ({
   return (
     <View style={styles.container}>
       <View style={[styles.searchBox, showCancel && styles.searchBoxFocused]}>
-        <MaterialIcons
-          name="search"
-          size={24}
-          color="#777"
-          style={styles.searchIcon}
-        />
         <TextInput
+          testID="input"
           ref={ref}
           style={styles.input}
           placeholder="Search..."
@@ -59,18 +53,14 @@ export const SearchBar = ({
           }}
         />
         {value.length > 0 && (
-          <TouchableOpacity onPress={handleClearSearch}>
-            <MaterialIcons
-              name="close"
-              size={24}
-              color="#777"
-              style={styles.clearIcon}
-            />
+          <TouchableOpacity testID="clear-button" onPress={handleClearSearch}>
+            <Text style={styles.clearIcon}>x</Text>
           </TouchableOpacity>
         )}
       </View>
       {showCancel && (
         <TouchableOpacity
+          testID="cancel-button"
           style={styles.cancelButton}
           onPress={handleCancelFocus}
         >
@@ -79,7 +69,7 @@ export const SearchBar = ({
       )}
     </View>
   );
-};
+}
 
 const styles = StyleSheet.create({
   container: {
@@ -104,17 +94,15 @@ const styles = StyleSheet.create({
     shadowRadius: 4,
     elevation: 4,
   },
-  searchIcon: {
-    marginRight: 8,
-  },
   input: {
     flex: 1,
     fontSize: 16,
   },
-  clearIcon: {
-    marginLeft: 8,
-  },
   cancelButton: {
     marginLeft: 8,
+  },
+  clearIcon: {
+    fontSize: 20,
+    fontWeight: 'bold',
   },
 });
