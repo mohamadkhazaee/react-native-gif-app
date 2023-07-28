@@ -6,38 +6,16 @@ import {
   Text,
   TouchableOpacity,
 } from 'react-native';
-import { GifCard } from '../../components';
+import { GifCard } from '../../shared/components';
 import { GifType, fetchRandomGif } from '../../api';
 
 export const RandomGifDisplay = () => {
   const [randomGif, setRandomGif] = useState<GifType>();
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  useEffect(() => {
-    fetchRandomGif()
-      .then((res) => {
-        setRandomGif(res.data);
-        setIsLoading(false);
-      })
-      .catch(() => {
-        setIsLoading(false);
-        setError('Error while connecting to server!');
-      });
-  }, []);
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setIsLoading(true);
-      fetchRandomGif();
-    }, 10000);
-    return () => clearInterval(interval);
-  }, []);
-
-  const handleRetry = () => {
+  const getData = () => {
     setIsLoading(true);
-    setError(null);
-
     fetchRandomGif()
       .then((res) => {
         setRandomGif(res.data);
@@ -49,27 +27,36 @@ export const RandomGifDisplay = () => {
       });
   };
 
-  if (isLoading) {
-    return (
-      <View style={styles.container}>
-        <ActivityIndicator size="large" />
-      </View>
-    );
-  }
-  if (error) {
-    return (
-      <View style={styles.container}>
-        <Text style={styles.errorText}>{error}</Text>
-        <TouchableOpacity onPress={handleRetry}>
-          <Text style={styles.retryText}>Retry</Text>
-        </TouchableOpacity>
-      </View>
-    );
-  }
+  const handleRetry = () => {
+    setIsLoading(true);
+    setError(null);
+    getData();
+  };
+
+  useEffect(() => {
+    getData();
+  }, []);
+
+  // TODO: fix interval duration
+  useEffect(() => {
+    const interval = setInterval(getData, 15000);
+    return () => clearInterval(interval);
+  }, []);
 
   return (
     <View style={styles.container}>
-      <GifCard {...randomGif!} />
+      {!!error && (
+        <>
+          <Text style={styles.errorText}>{error}</Text>
+          <TouchableOpacity onPress={handleRetry}>
+            <Text style={styles.retryText}>Retry</Text>
+          </TouchableOpacity>
+        </>
+      )}
+
+      {isLoading && <ActivityIndicator size="large" />}
+
+      {randomGif && !isLoading && <GifCard {...randomGif} />}
     </View>
   );
 };

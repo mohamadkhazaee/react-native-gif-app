@@ -5,7 +5,7 @@ import {
   TouchableOpacity,
   StyleSheet,
 } from 'react-native';
-import { GifType } from '../api';
+import { GifType } from '../../api';
 
 export function GifCard({ images, title, url, rating }: GifType) {
   const handleOpenURL = (url: string) => {

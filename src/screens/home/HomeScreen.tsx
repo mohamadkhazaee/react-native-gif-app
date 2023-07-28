@@ -1,69 +1,56 @@
-import {
-  StyleSheet,
-  View,
-  Text,
-  FlatList,
-  Image,
-  Dimensions,
-  TouchableOpacity,
-} from 'react-native';
+import { StyleSheet, View, Text } from 'react-native';
 import { RandomGifDisplay } from './RandomGifDisplay';
 import { useEffect, useState } from 'react';
 import type { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { RootStackParamList } from '../../../App';
-import { SearchBar } from '../../components';
+import { SearchBar } from '../../shared/components';
 import { GifType, searchGifs } from '../../api';
+import { useDebounce } from '../../shared/hooks';
+import { GifsList } from './GifsList';
 
 type HomeScreenProps = NativeStackScreenProps<RootStackParamList, 'Home'>;
 
 export function HomeScreen({ navigation }: HomeScreenProps) {
   const [searchText, setSearchText] = useState('');
-  const [gifs, setGifs] = useState<GifType[]>();
+  const [isInputFocused, setIsInputFocused] = useState(false);
+  const [gifs, setGifs] = useState<GifType[] | null>(null);
+
+  const debouncedSearchText = useDebounce(searchText, 1000);
+
   useEffect(() => {
-    if (searchText.length > 2) {
-      searchGifs(searchText)
+    if (debouncedSearchText.length > 2) {
+      searchGifs(debouncedSearchText)
         .then((res) => {
           setGifs(res.data);
         })
         .catch((err) => {
           throw Error(err);
         });
+    } else {
+      if (gifs) {
+        setGifs(null);
+      }
     }
-  }, [searchText]);
+  }, [debouncedSearchText]);
+
   return (
     <View style={styles.container}>
       <SearchBar
         value={searchText}
         onChange={(value) => setSearchText(value)}
+        onFocus={() => {
+          setIsInputFocused(true);
+        }}
+        onBlur={() => {
+          setIsInputFocused(false);
+          setGifs(null);
+        }}
       />
-      {searchText.length >= 2 ? (
+
+      {isInputFocused ? (
         <>
           <Text style={styles.resultText}>search results:</Text>
-
-          <FlatList
-            keyExtractor={(item) => item.id}
-            data={gifs}
-            numColumns={3}
-            renderItem={({ item }) => {
-              return (
-                <TouchableOpacity
-                  onPress={() =>
-                    //   TODO: fix navigate params
-                    navigation.navigate('Details', { data: item })
-                  }
-                >
-                  <Image
-                    source={{ uri: item?.images.original?.url }}
-                    style={{
-                      width: Dimensions.get('window').width / 3,
-                      padding: 10,
-                      aspectRatio: 1,
-                    }}
-                  />
-                </TouchableOpacity>
-              );
-            }}
-          />
+          {!!gifs && <GifsList gifs={gifs} navigation={navigation} />}
         </>
       ) : (
         <RandomGifDisplay />

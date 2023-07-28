@@ -8,11 +8,23 @@ import {
 } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
 
-type SearchBarProps = { value: string; onChange: (value: string) => void };
-export const SearchBar = ({ value, onChange }: SearchBarProps) => {
+type SearchBarProps = {
+  value: string;
+  onChange: (value: string) => void;
+  onFocus: () => void;
+  onBlur: () => void;
+};
+
+export const SearchBar = ({
+  value,
+  onChange,
+  onFocus,
+  onBlur,
+}: SearchBarProps) => {
   const [showCancel, setShowCancel] = useState(false);
 
   const ref = useRef<TextInput>(null);
+
   const handleClearSearch = () => {
     onChange('');
   };
@@ -20,6 +32,7 @@ export const SearchBar = ({ value, onChange }: SearchBarProps) => {
   const handleCancelFocus = () => {
     setShowCancel(false);
     onChange('');
+    onBlur();
     if (ref.current) {
       ref.current.blur();
     }
@@ -40,7 +53,10 @@ export const SearchBar = ({ value, onChange }: SearchBarProps) => {
           placeholder="Search..."
           value={value}
           onChangeText={onChange}
-          onFocus={() => setShowCancel(true)}
+          onFocus={() => {
+            setShowCancel(true);
+            onFocus();
+          }}
         />
         {value.length > 0 && (
           <TouchableOpacity onPress={handleClearSearch}>
