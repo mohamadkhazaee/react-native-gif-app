@@ -37,7 +37,7 @@ export function SearchBar({
       ref.current.blur();
     }
   };
-
+  const a = 2;
   return (
     <View style={styles.container}>
       <View style={[styles.searchBox, showCancel && styles.searchBoxFocused]}>
