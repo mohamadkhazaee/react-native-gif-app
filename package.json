@@ -12,12 +12,6 @@
     "format": "prettier --write .",
     "test": "jest"
   },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged",
-      "pre-push": "yarn scripts:lint && yarn scripts:type-check"
-    }
-  },
   "dependencies": {
     "@react-navigation/native": "^6.1.7",
     "@react-navigation/native-stack": "^6.9.13",
@@ -41,9 +35,7 @@
     "eslint-plugin-prettier": "^5.0.0",
     "eslint-plugin-react": "^7.33.0",
     "eslint-plugin-react-hooks": "^4.6.0",
-    "husky": "^8.0.3",
     "jest": "^29.6.2",
-    "lint-staged": "^13.2.3",
     "prettier": "^3.0.0",
     "react-native-dotenv": "^3.4.9",
     "react-test-renderer": "^18.2.0",
