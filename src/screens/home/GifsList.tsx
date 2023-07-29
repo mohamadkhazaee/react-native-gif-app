@@ -7,8 +7,8 @@ import {
   StyleSheet,
 } from 'react-native';
 import type { NativeStackScreenProps } from '@react-navigation/native-stack';
-import { GifType } from 'src/api';
-import { RootStackParamList } from '@root/App';
+import { GifType } from '../../api';
+import { RootStackParamList } from '../../../App';
 
 type GifsListProps = {
   gifs: GifType[];

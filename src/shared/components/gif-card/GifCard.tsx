@@ -7,7 +7,7 @@ import {
   Dimensions,
   View,
 } from 'react-native';
-import { GifType } from 'src/api';
+import { GifType } from '../../../api';
 
 const imageSize = Dimensions.get('window').width - 20;
 
@@ -25,6 +25,7 @@ export function GifCard({ images, title, url, rating }: GifType) {
         source={{ uri: images.original?.url }}
         style={styles.gif}
       />
+
       <View style={styles.detailsContainer}>
         <View style={styles.contentContainer}>
           <Text testID="title" style={styles.title}>
@@ -34,6 +35,7 @@ export function GifCard({ images, title, url, rating }: GifType) {
             <Text style={styles.link}>{url}</Text>
           </TouchableOpacity>
         </View>
+
         <View testID="age-restriction" style={styles.ageRestrictionBadge}>
           <Text style={styles.ageRestrictionText}>{rating?.toUpperCase()}</Text>
         </View>
@@ -56,7 +58,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     gap: 15,
     alignItems: 'center',
-    // TODO: fix flex issues
     justifyContent: 'space-between',
   },
   contentContainer: {

@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { View, StyleSheet, ActivityIndicator, Text } from 'react-native';
-import { Button, GifCard } from 'src/shared/components';
-import { GifType, fetchRandomGif } from 'src/api';
+import { Button, GifCard } from '../../shared/components';
+import { GifType, fetchRandomGif } from '../../api';
 
 export const RandomGifDisplay = () => {
   const [randomGif, setRandomGif] = useState<GifType>();
@@ -22,7 +22,6 @@ export const RandomGifDisplay = () => {
   };
 
   const handleRetry = () => {
-    setIsLoading(true);
     setError(null);
     getData();
   };

@@ -1,7 +1,8 @@
-import { RootStackParamList } from '@root/App';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { View, StyleSheet } from 'react-native';
-import { GifCard } from 'src/shared/components';
+import { RootStackParamList } from '../../../App';
+import { GifCard } from '../../shared/components';
+
 type DetailsScreenProps = NativeStackScreenProps<RootStackParamList, 'Details'>;
 
 export function DetailsScreen({ route }: DetailsScreenProps) {

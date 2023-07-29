@@ -6,13 +6,14 @@ import {
   StyleSheet,
   Text,
 } from 'react-native';
-import { Button } from 'src/shared/components';
+import { Button } from '../';
 
 type SearchBarProps = {
   value: string;
   onChange: (value: string) => void;
   onFocus?: () => void;
   onBlur?: () => void;
+  onClear?: () => void;
 };
 
 export function SearchBar({
@@ -20,14 +21,11 @@ export function SearchBar({
   onChange,
   onFocus,
   onBlur,
+  onClear,
 }: SearchBarProps) {
   const [showCancel, setShowCancel] = useState(false);
 
   const ref = useRef<TextInput>(null);
-
-  const handleClearSearch = () => {
-    onChange('');
-  };
 
   const handleCancelFocus = () => {
     setShowCancel(false);
@@ -37,6 +35,7 @@ export function SearchBar({
       ref.current.blur();
     }
   };
+
   return (
     <View style={styles.container}>
       <View style={[styles.searchBox, showCancel && styles.searchBoxFocused]}>
@@ -53,7 +52,12 @@ export function SearchBar({
           }}
         />
         {value.length > 0 && (
-          <TouchableOpacity testID="clear-button" onPress={handleClearSearch}>
+          <TouchableOpacity
+            testID="clear-button"
+            onPress={() => {
+              onClear?.();
+            }}
+          >
             <Text style={styles.clearIcon}>x</Text>
           </TouchableOpacity>
         )}
@@ -103,7 +107,7 @@ const styles = StyleSheet.create({
     marginLeft: 8,
   },
   clearIcon: {
-    fontSize: 20,
+    fontSize: 16,
     fontWeight: 'bold',
   },
 });

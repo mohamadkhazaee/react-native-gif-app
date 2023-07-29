@@ -1,4 +1,3 @@
-// TODO: improve typing
 export type GifType = {
   type: string;
   id: string;

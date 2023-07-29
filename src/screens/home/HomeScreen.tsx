@@ -2,10 +2,10 @@ import { StyleSheet, View, Text } from 'react-native';
 import { RandomGifDisplay } from './RandomGifDisplay';
 import { useEffect, useState } from 'react';
 import type { NativeStackScreenProps } from '@react-navigation/native-stack';
-import { RootStackParamList } from '@root/App';
-import { SearchBar } from 'src/shared/components';
-import { GifType, searchGifs } from 'src/api';
-import { useDebounce } from 'src/shared/hooks';
+import { RootStackParamList } from '../../../App';
+import { SearchBar } from '../../shared/components';
+import { GifType, searchGifs } from '../../api';
+import { useDebounce } from '../../shared/hooks';
 import { GifsList } from './GifsList';
 
 type HomeScreenProps = NativeStackScreenProps<RootStackParamList, 'Home'>;
@@ -15,7 +15,7 @@ export function HomeScreen({ navigation }: HomeScreenProps) {
   const [isInputFocused, setIsInputFocused] = useState(false);
   const [gifs, setGifs] = useState<GifType[] | null>(null);
 
-  const debouncedSearchText = useDebounce(searchText, 1000);
+  const debouncedSearchText = useDebounce(searchText, 500);
 
   useEffect(() => {
     if (debouncedSearchText.length > 2) {
@@ -26,10 +26,6 @@ export function HomeScreen({ navigation }: HomeScreenProps) {
         .catch((err) => {
           throw Error(err);
         });
-    } else {
-      if (gifs) {
-        setGifs(null);
-      }
     }
   }, [debouncedSearchText]);
 
@@ -38,6 +34,10 @@ export function HomeScreen({ navigation }: HomeScreenProps) {
       <SearchBar
         value={searchText}
         onChange={(value) => setSearchText(value)}
+        onClear={() => {
+          setSearchText('');
+          setGifs(null);
+        }}
         onFocus={() => {
           setIsInputFocused(true);
         }}
