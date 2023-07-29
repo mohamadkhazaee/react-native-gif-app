@@ -6,7 +6,7 @@ import {
   StyleSheet,
   Text,
 } from 'react-native';
-import { Button } from '../';
+import { Button } from 'src/shared/components';
 
 type SearchBarProps = {
   value: string;

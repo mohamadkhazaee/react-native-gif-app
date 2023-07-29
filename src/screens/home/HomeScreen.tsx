@@ -2,10 +2,10 @@ import { StyleSheet, View, Text } from 'react-native';
 import { RandomGifDisplay } from './RandomGifDisplay';
 import { useEffect, useState } from 'react';
 import type { NativeStackScreenProps } from '@react-navigation/native-stack';
-import { RootStackParamList } from '../../../App';
-import { SearchBar } from '../../shared/components';
-import { GifType, searchGifs } from '../../api';
-import { useDebounce } from '../../shared/hooks';
+import { RootStackParamList } from '@root/App';
+import { SearchBar } from 'src/shared/components';
+import { GifType, searchGifs } from 'src/api';
+import { useDebounce } from 'src/shared/hooks';
 import { GifsList } from './GifsList';
 
 type HomeScreenProps = NativeStackScreenProps<RootStackParamList, 'Home'>;

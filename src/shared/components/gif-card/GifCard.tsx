@@ -7,7 +7,7 @@ import {
   Dimensions,
   View,
 } from 'react-native';
-import { GifType } from '../../../api';
+import { GifType } from 'src/api';
 
 const imageSize = Dimensions.get('window').width - 20;
 
