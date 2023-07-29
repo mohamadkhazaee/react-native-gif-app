@@ -6,6 +6,7 @@ import {
   StyleSheet,
   Text,
 } from 'react-native';
+import { Button } from '../';
 
 type SearchBarProps = {
   value: string;
@@ -59,13 +60,14 @@ export function SearchBar({
         )}
       </View>
       {showCancel && (
-        <TouchableOpacity
-          testID="cancel-button"
-          style={styles.cancelButton}
-          onPress={handleCancelFocus}
-        >
-          <Text>cancel</Text>
-        </TouchableOpacity>
+        <Button
+          title="cancel"
+          touchableContainerProps={{
+            testID: 'cancel-button',
+            style: styles.cancelButton,
+            onPress: handleCancelFocus,
+          }}
+        />
       )}
     </View>
   );

@@ -1,12 +1,6 @@
 import { useEffect, useState } from 'react';
-import {
-  View,
-  StyleSheet,
-  ActivityIndicator,
-  Text,
-  TouchableOpacity,
-} from 'react-native';
-import { GifCard } from '../../shared/components';
+import { View, StyleSheet, ActivityIndicator, Text } from 'react-native';
+import { Button, GifCard } from '../../shared/components';
 import { GifType, fetchRandomGif } from '../../api';
 
 export const RandomGifDisplay = () => {
@@ -47,9 +41,11 @@ export const RandomGifDisplay = () => {
       {!!error && (
         <>
           <Text style={styles.errorText}>{error}</Text>
-          <TouchableOpacity onPress={handleRetry}>
-            <Text style={styles.retryText}>Retry</Text>
-          </TouchableOpacity>
+          <Button
+            title="Retry"
+            touchableContainerProps={{ onPress: handleRetry }}
+            textProps={{ style: styles.retryText }}
+          />
         </>
       )}
 
