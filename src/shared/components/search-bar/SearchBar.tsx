@@ -6,14 +6,14 @@ import {
   StyleSheet,
   Text,
 } from 'react-native';
-import { Button } from '../';
+import { Button } from '../button/Button';
 
 type SearchBarProps = {
   value: string;
   onChange: (value: string) => void;
+  onClear: () => void;
   onFocus?: () => void;
   onBlur?: () => void;
-  onClear?: () => void;
 };
 
 export function SearchBar({
@@ -55,7 +55,7 @@ export function SearchBar({
           <TouchableOpacity
             testID="clear-button"
             onPress={() => {
-              onClear?.();
+              onClear();
             }}
           >
             <Text style={styles.clearIcon}>x</Text>
