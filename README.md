@@ -11,7 +11,7 @@ This project is a React Native app developed as part of the Picnic recruitment p
 
 ## Tech Stack
 
-- React Native: Used for cross-platform mobile app development.
+- Expo CLI: Chosen for cross-platform mobile app development, especially due to time limitations and its easier initial setup compared to React Native CLI.
 - React Navigation: Handles app navigation and screen transitions.
 - Axios: Used for handling HTTP requests to fetch data from the GIPHY API.
 - react-native-dotenv: Saves environment variables like BASE_URL and API_KEY securely.
