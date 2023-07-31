@@ -8,6 +8,7 @@ This project is a React Native app developed as part of the Picnic recruitment p
 - Automatic refresh every 10 seconds for new random GIFs.
 - Implementing live search functionality with the GIPHY API.
 - Navigating to a detailed screen on tapping a search result.
+- Load more GIFs as you scroll to the bottom of the list (Infinite Scroll).
 
 ## Tech Stack
 
@@ -31,6 +32,7 @@ To set up the project and run it on your local development environment, follow t
 3. Create a .env file in the root directory of the project and add the environment variables.
 
 Running the App:
+
 - For iOS: Use `yarn ios`.
 - For Android: Use `yarn android`.
 
@@ -50,6 +52,7 @@ Component tests have been implemented using `Jest` and `@testing-library/react-n
 ## Emulators
 
 The app has been tested on the following emulators:
+
 - Pixel 4 API 31 (Android)
 - iPhone SE (3rd generation) iOS 16.4 (iOS)
 

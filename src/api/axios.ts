@@ -7,5 +7,4 @@ export default axios.create({
   headers: {
     'Content-Type': 'application/json',
   },
-  transformResponse: [(response) => JSON.parse(response).data],
 });

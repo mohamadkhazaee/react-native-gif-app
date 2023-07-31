@@ -13,3 +13,23 @@ export type GifType = {
     };
   };
 };
+
+export type FetchRandomGif = {
+  data: GifType;
+};
+
+export type PaginationType = {
+  offset: number;
+  total_count: number;
+  count: number;
+};
+
+export type SearchGifParams = {
+  query: string;
+  offset: number;
+};
+
+export type SearchGif = {
+  response: { data: GifType[]; pagination: PaginationType };
+  params: SearchGifParams;
+};
